@@ -7,19 +7,17 @@ const dbo = require('../db/conn');
 const ObjectId = require ('mongodb').ObjectId;
 
 //GET ALL
-recordRoutes.route('/record').get( (req, res) => {
-    let db_connect = dbo.getDb('test');
-console.log(db_connect);
-    db_connect
-        .collection('records')
-        .find({})
-        .toArray( (err, result) => {
-            if (err) {
-                console.log('Error: '+err);
-                return;
-            }
-            res.json(result);
-        });
+recordRoutes.route('/record').get( async (req, res) => {
+    try  {
+        let db_connect = dbo.getDb('test');
+        let result = await db_connect
+            .collection('records')
+            .find({})
+            .toArray();
+        res.json(result);
+    } catch (error) {
+        console.log('Error: '+error);
+    }
 });
 
 // GET ELEMENT BY ID
