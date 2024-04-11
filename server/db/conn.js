@@ -9,10 +9,10 @@ module.exports = {
         try {
             await client.connect();
 
-            _db = client.db('Cluster0');
-            console.log('Successfully connected to MongoDB'); //not showing
+            _db = client.db('test');
+            console.log('Successfully connected to MongoDB');
         } catch (err) {
-            console.log('Connection failed :'+ error);
+            console.log('Connection failed :'+ err);
         }
     },
    
