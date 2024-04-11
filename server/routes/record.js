@@ -33,7 +33,6 @@ recordRoutes.route('/record/:id').get( (req, res) => {
 });
 
 // CREATE ELEMENT
-
 recordRoutes.route('/record/add').post( (req, res) => {
     let db_connect = dbo.getDb('Cluster0');
     let obj = {
