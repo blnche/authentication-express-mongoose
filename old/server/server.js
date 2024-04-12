@@ -1,25 +1,19 @@
 const express = require('express');
 const app = express();
 const cors = require ('cors');
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/user');
 
 require('dotenv').config({path: './config.env'});
-const dbo = require ('./db/conn');
 const port = process.env['PORT'] || 3001;
 
 app.use(cors());
 app.use(express.json());
+app.use(require('./routes/record'));
 
-// AUTH ROUTES
-app.use('/auth', authRoutes);
+//DB
+const dbo = require ('./db/conn');
 
-// USER ROUTES
-app.use('/user', userRoutes);
-
-// START SERVER & CONNECT TO DB
 app.listen(port, () => {
-    // CONNECT TO DB
+    //when server starts -> db connect
     dbo.connectToServer( (err) => {
         if (err) console.log(err);
     });
