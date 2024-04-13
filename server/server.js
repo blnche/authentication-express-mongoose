@@ -5,7 +5,7 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 
 require('dotenv').config({path: './config.env'});
-const dbo = require ('./db/conn');
+const connectDB = require ('./db/conn');
 const port = process.env['PORT'] || 3001;
 
 app.use(cors());
@@ -20,8 +20,6 @@ app.use('/user', userRoutes);
 // START SERVER & CONNECT TO DB
 app.listen(port, () => {
     // CONNECT TO DB
-    dbo.connectToServer( (err) => {
-        if (err) console.log(err);
-    });
+    connectDB();
     console.log(`'Server is running on port: ${port}'`);
 });
